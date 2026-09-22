@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grand Fork | Online Menu & Ordering</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore The Grand Fork's extensive menu and prices. Discover our dinner menu, takeout options, appetizers, burgers, steaks, and decadent desserts. Order online today!">
+    <meta name="keywords" content="restaurant menu, casual dining, grand fork menu, online ordering, dinner menu, burgers, steaks">
+    
+    <!-- Custom Restaurant Favicon (SVG Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23d97706' d='M208 32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 128 32 0 0-128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 128 24 0c30.9 0 56 25.1 56 56l0 80c0 44.2-35.8 80-80 80l-24 0 0 144c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-144-32 0 0 144c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-144-24 0c-44.2 0-80-35.8-80-80l0-80c0-30.9 25.1-56 56-56l24 0 0-128c0-17.7 14.3-32 32-32s32 14.3 32 32l0 128 32 0 0-128z'/></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#fbe8e6',
+                            600: '#d97706', /* Warm Amber */
+                            700: '#b45309',
+                            900: '#78350f',
+                            dark: '#1c1917', /* Rich Charcoal */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar hiding for horizontal tabs */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-brand-dark antialiased selection:bg-brand-600 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-dark text-amber-100 text-xs sm:text-sm py-2 px-4 text-center font-medium">
+        <span>✨ Welcome to The Grand Fork! Enjoy Fast Online Takeout & Delivery Services. <a href="#menu" class="underline hover:text-white ml-1">Explore Menu Prices</a></span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-brand-700 to-brand-600 flex items-center justify-center text-white shadow-md ring-2 ring-brand-100">
+                        <i class="fa-solid fa-utensils text-lg"></i>
+                    </div>
+                    <a href="#" class="font-serif text-2xl font-bold tracking-tight text-brand-dark flex flex-col">
+                        <span>The Grand <span class="text-brand-600">Fork</span></span>
+                        <span class="text-[10px] tracking-widest text-stone-500 uppercase font-sans font-semibold -mt-1">Casual Dining & Bar</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-stone-700">
+                    <a href="#" class="text-brand-600 font-semibold transition hover:text-brand-600">Home</a>
+                    <a href="#menu" class="transition hover:text-brand-600">Menu</a>
+                    <a href="#offers" class="transition hover:text-brand-600">Offers</a>
+                    <a href="#about" class="transition hover:text-brand-600">About</a>
+                    <a href="#locations" class="transition hover:text-brand-600">Locations</a>
+                    <a href="#testimonials" class="transition hover:text-brand-600">Reviews</a>
+                    <a href="#faq" class="transition hover:text-brand-600">FAQ</a>
+                    <a href="#contact" class="transition hover:text-brand-600">Contact</a>
+                </div>
+
+                <!-- Right Actions: Cart & CTA -->
+                <div class="flex items-center space-x-4">
+                    <!-- Cart Icon with Badge -->
+                    <button id="cart-btn" class="relative p-2 text-stone-700 hover:text-brand-600 transition" aria-label="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                    </button>
+                    
+                    <a href="#menu" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-brand-600 text-white font-medium text-sm shadow-md hover:bg-brand-700 transition">
+                        Order Now
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-stone-700 focus:outline-none p-2" aria-label="Toggle Mobile Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-brand-600 bg-brand-50">Home</a>
+            <a href="#menu" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">Menu</a>
+            <a href="#offers" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">Offers</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">About</a>
+            <a href="#locations" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">Locations</a>
+            <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">Reviews</a>
+            <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">FAQ</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:bg-stone-50">Contact</a>
+            <div class="pt-2">
+                <a href="#menu" class="w-full text-center block px-5 py-3 rounded-full bg-brand-600 text-white font-medium text-sm shadow">Order Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-stone-900 text-white overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=2000" alt="Gourmet American Casual Dining Spread" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/80 to-transparent z-0"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 flex flex-col items-start justify-center min-h-[580px]">
+            <span class="inline-block bg-brand-600/90 text-amber-100 text-xs sm:text-sm font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4 shadow">
+                ✨ America's Favorite Casual Dining Experience
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight max-w-3xl leading-tight mb-6">
+                Restaurant Menu & Online Ordering
+            </h1>
+            <p class="text-lg sm:text-xl text-stone-300 max-w-xl mb-8 font-light">
+                Welcome to The Grand Fork. Browse our extraordinary dinner menu, mouthwatering burgers, sizzling steaks, and legendary handmade desserts packed with fresh ingredients.
+            </p>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                <a href="#menu" class="px-8 py-4 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-center shadow-lg transition">
+                    View Full Menu & Prices
+                </a>
+                <a href="#menu" class="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-semibold text-center border border-white/20 transition">
+                    Order Takeout Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Short Introduction Section -->
+    <section class="py-16 bg-white border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Freshness & Quality</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-2 mb-6">A Legendary Feast Crafted For Every Craving</h2>
+            <p class="text-stone-600 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">
+                Whether you're searching for an extensive dinner menu for family gatherings, quick takeout options for busy weeknights, or decadent treats that rival the finest bakeries, The Grand Fork delivers unmatched taste. Our kitchen prepares every dish from scratch daily using premium meats, farm-fresh vegetables, and artisanal ingredients.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Categories & Interactive Grid -->
+    <section id="menu" class="py-16 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <div>
+                    <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Our Menu</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Explore Menu Categories</h2>
+                    <p class="text-stone-600 mt-1">Check out transparent menu prices and customize your order instantly.</p>
+                </div>
+                <!-- Search bar -->
+                <div class="mt-4 md:mt-0 w-full md:w-72">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+                            <i class="fa-solid fa-search"></i>
+                        </span>
+                        <input type="text" id="menu-search" placeholder="Search dishes..." class="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-stone-200 text-sm focus:outline-none focus:border-brand-600 shadow-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrollable Categories Pills -->
+            <div id="category-filters" class="flex space-x-3 overflow-x-auto pb-4 scrollbar-hide justify-start lg:justify-center">
+                <button data-category="all" class="category-btn px-6 py-2.5 rounded-full bg-brand-600 text-white font-medium text-sm shadow-md whitespace-nowrap transition">All Items</button>
+                <button data-category="appetizers" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Appetizers</button>
+                <button data-category="salads" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Salads</button>
+                <button data-category="pasta" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Pasta</button>
+                <button data-category="burgers" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Burgers</button>
+                <button data-category="steaks" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Steaks</button>
+                <button data-category="desserts" class="category-btn px-6 py-2.5 rounded-full bg-white text-stone-700 hover:bg-stone-100 font-medium text-sm border border-stone-200 shadow-sm whitespace-nowrap transition">Desserts</button>
+            </div>
+
+            <!-- Menu Cards Container -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                <!-- Dynamically populated via script -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers & Coupons -->
+    <section id="offers" class="py-16 bg-white border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Deals & Promos</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Special Offers & Daily Coupons</h2>
+                <p class="text-stone-600 mt-2">Enjoy delightful discounts on your next online order or dine-in experience at The Grand Fork.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Offer Card 1 -->
+                <div class="bg-gradient-to-br from-brand-900 to-stone-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-burger"></i>
+                    </div>
+                    <div>
+                        <span class="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Weekend Special</span>
+                        <h3 class="font-serif text-2xl font-bold mt-4 mb-2">20% Off Family Platters</h3>
+                        <p class="text-stone-300 text-sm">Order any family combo or steak selection this weekend and get 20% off automatically.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400 block">Use Code:</span>
+                            <span class="font-mono font-bold text-amber-400 tracking-wider">GRANDFAMILY20</span>
+                        </div>
+                        <button onclick="applyCoupon('GRANDFAMILY20', 20)" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition shadow">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Offer Card 2 -->
+                <div class="bg-gradient-to-br from-amber-700 to-brand-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-cake-candles"></i>
+                    </div>
+                    <div>
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sweet Treat</span>
+                        <h3 class="font-serif text-2xl font-bold mt-4 mb-2">Free Slice of Cheesecake</h3>
+                        <p class="text-stone-200 text-sm">Get a complimentary slice of our legendary artisanal cheesecake on orders over $50.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-200 block">Use Code:</span>
+                            <span class="font-mono font-bold text-amber-200 tracking-wider">SWEETFORK</span>
+                        </div>
+                        <button onclick="applyCoupon('SWEETFORK', 10)" class="px-4 py-2 bg-white text-brand-dark hover:bg-stone-100 rounded-xl text-xs font-bold transition shadow">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Offer Card 3 -->
+                <div class="bg-gradient-to-br from-stone-800 to-stone-950 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div>
+                        <span class="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Takeout Perk</span>
+                        <h3 class="font-serif text-2xl font-bold mt-4 mb-2">Free Delivery on First Order</h3>
+                        <p class="text-stone-300 text-sm">New to The Grand Fork? Enjoy $0 delivery fee on your first online takeout or delivery dispatch.</p>
+                    </div>
+                    <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-400 block">Use Code:</span>
+                            <span class="font-mono font-bold text-amber-400 tracking-wider">FIRSTFORK</span>
+                        </div>
+                        <button onclick="applyCoupon('FIRSTFORK', 15)" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold transition shadow">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Our Story Section -->
+    <section id="about" class="py-20 bg-brand-50 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-brand-600/10 rounded-3xl transform -rotate-2"></div>
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000" alt="Restaurant Interior and Chefs" class="relative rounded-3xl shadow-xl w-full h-[420px] object-cover">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl hidden sm:flex items-center space-x-4 border border-stone-100">
+                        <div class="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-900 text-lg">15+ Years</h4>
+                            <p class="text-xs text-stone-500">Of Culinary Excellence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Our Heritage</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Crafting Unforgettable Dining Moments Since 2011</h2>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed">
+                        The Grand Fork started with a simple belief: casual dining should never compromise on quality, freshness, or warmth. Founded by passionate chefs who wanted to bring gourmet recipes into a welcoming neighborhood setting, we’ve grown into a beloved destination for food lovers.
+                    </p>
+                    <p class="text-stone-600 leading-relaxed">
+                        Every steak is hand-selected, every burger patty is freshly ground in-house, and our legendary desserts are handcrafted daily using time-honored baking traditions. Thank you for making us a part of your celebrations, family dinners, and weeknight treats.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-stone-200">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-600">50K+</h3>
+                            <p class="text-xs text-stone-500 mt-1">Happy Diners</p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-600">35+</h3>
+                            <p class="text-xs text-stone-500 mt-1">Signature Dishes</p>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-brand-600">4.9</h3>
+                            <p class="text-xs text-stone-500 mt-1">Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations & Branch Details -->
+    <section id="locations" class="py-16 bg-white border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Find Us</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Our Grand Fork Locations</h2>
+                <p class="text-stone-600 mt-2">Visit one of our beautifully designed restaurants or order takeout from the nearest kitchen.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Location 1 -->
+                <div class="bg-brand-50 rounded-3xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 rounded-2xl overflow-hidden mb-4 bg-stone-200">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600" alt="Downtown Branch" class="w-full h-full object-cover">
+                        </div>
+                        <span class="bg-brand-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Flagship Location</span>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mt-2">Downtown Grand Fork</h3>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-location-dot text-brand-600 mr-1.5"></i> 742 Evergreen Terrace, Suite 100</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-phone text-brand-600 mr-1.5"></i> (555) 234-5678</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-clock text-brand-600 mr-1.5"></i> Mon-Sun: 11:00 AM - 11:00 PM</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-200 flex space-x-3">
+                        <button onclick="selectLocation('Downtown Grand Fork')" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-xl transition shadow">Select Branch</button>
+                        <a href="https://maps.google.com" target="_blank" class="px-4 py-2.5 bg-white border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-semibold rounded-xl transition">Map</a>
+                    </div>
+                </div>
+
+                <!-- Location 2 -->
+                <div class="bg-brand-50 rounded-3xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 rounded-2xl overflow-hidden mb-4 bg-stone-200">
+                            <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=600" alt="Westside Mall Branch" class="w-full h-full object-cover">
+                        </div>
+                        <span class="bg-stone-700 text-white text-xs font-bold px-2.5 py-1 rounded-md">Mall District</span>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mt-2">Westside Mall Branch</h3>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-location-dot text-brand-600 mr-1.5"></i> 1285 Galleria Blvd, West Wing</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-phone text-brand-600 mr-1.5"></i> (555) 876-5432</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-clock text-brand-600 mr-1.5"></i> Mon-Sun: 10:30 AM - 10:00 PM</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-200 flex space-x-3">
+                        <button onclick="selectLocation('Westside Mall Branch')" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-xl transition shadow">Select Branch</button>
+                        <a href="https://maps.google.com" target="_blank" class="px-4 py-2.5 bg-white border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-semibold rounded-xl transition">Map</a>
+                    </div>
+                </div>
+
+                <!-- Location 3 -->
+                <div class="bg-brand-50 rounded-3xl p-6 border border-stone-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="h-40 rounded-2xl overflow-hidden mb-4 bg-stone-200">
+                            <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&fit=crop&q=80&w=600" alt="Harbor View Branch" class="w-full h-full object-cover">
+                        </div>
+                        <span class="bg-stone-700 text-white text-xs font-bold px-2.5 py-1 rounded-md">Waterfront</span>
+                        <h3 class="font-serif text-xl font-bold text-stone-900 mt-2">Harbor View Branch</h3>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-location-dot text-brand-600 mr-1.5"></i> 402 Ocean Drive, Pier 4</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-phone text-brand-600 mr-1.5"></i> (555) 432-1098</p>
+                        <p class="text-stone-600 text-sm mt-1"><i class="fa-solid fa-clock text-brand-600 mr-1.5"></i> Mon-Sun: 12:00 PM - 11:30 PM</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-200 flex space-x-3">
+                        <button onclick="selectLocation('Harbor View Branch')" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-xl transition shadow">Select Branch</button>
+                        <a href="https://maps.google.com" target="_blank" class="px-4 py-2.5 bg-white border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-semibold rounded-xl transition">Map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials & Reviews -->
+    <section id="testimonials" class="py-16 bg-brand-50 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Testimonials</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Loved by Thousands of Foodies</h2>
+                <p class="text-stone-600 mt-2">Read real feedback from our valued customers who dine in or order takeout daily.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 mb-4 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-700 italic text-sm leading-relaxed">
+                            "The Grand Fork never disappoints! Their cheesecakes are legendary, and the Grand Truffle Burger is easily the best burger in town. Online ordering was smooth and fast."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-100 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center">
+                            JS
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-stone-900">Jessica Simmons</h4>
+                            <p class="text-xs text-stone-500">Verified Diner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 mb-4 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-700 italic text-sm leading-relaxed">
+                            "We ordered the Prime Ribeye and Crispy Calamari for takeout. The food arrived piping hot, perfectly seasoned, and packaging was exceptional. Highly recommended!"
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-100 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center">
+                            MR
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-stone-900">Marcus Reynolds</h4>
+                            <p class="text-xs text-stone-500">Online Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-500 mb-4 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-700 italic text-sm leading-relaxed">
+                            "Great ambiance for family dinners and date nights. The service is prompt and friendly, and the menu prices are very transparent with generous portion sizes."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-stone-100 flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center">
+                            AL
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-stone-900">Amanda Lopez</h4>
+                            <p class="text-xs text-stone-500">Local Food Blogger</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white border-t border-stone-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Got Questions?</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">Frequently Asked Questions</h2>
+                <p class="text-stone-600 mt-2">Find answers regarding our online ordering, reservations, and menu items.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-stone-200 rounded-2xl overflow-hidden transition">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-stone-900 flex justify-between items-center bg-brand-50 hover:bg-stone-100 transition">
+                        <span>How does online takeout and delivery work?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 text-stone-600 text-sm leading-relaxed bg-white">
+                        Simply browse our menu, add your favorite items to the cart, apply any coupon codes, and proceed to checkout. You can choose contactless delivery or quick in-store pickup at any of our branches.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-stone-200 rounded-2xl overflow-hidden transition">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-stone-900 flex justify-between items-center bg-brand-50 hover:bg-stone-100 transition">
+                        <span>Do you accommodate dietary restrictions or allergies?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 text-stone-600 text-sm leading-relaxed bg-white">
+                        Yes! Many of our dishes can be customized. We offer gluten-sensitive, vegetarian, and vegan options. Please note any special instructions in your cart before checking out.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-stone-200 rounded-2xl overflow-hidden transition">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-stone-900 flex justify-between items-center bg-brand-50 hover:bg-stone-100 transition">
+                        <span>Can I make table reservations in advance?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 text-stone-600 text-sm leading-relaxed bg-white">
+                        While we welcome walk-ins, reservations are recommended for weekend dinners and large parties. You can call our branch directly or use our contact form to reserve a table.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-stone-200 rounded-2xl overflow-hidden transition">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-bold text-stone-900 flex justify-between items-center bg-brand-50 hover:bg-stone-100 transition">
+                        <span>Are your cheesecakes and desserts made in-house?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 text-stone-600 text-sm leading-relaxed bg-white">
+                        Absolutely! All our cheesecakes, cakes, and artisanal pastries are handcrafted daily by our master pastry chefs using premium chocolates, fresh fruits, and real butter.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Hours Section -->
+    <section id="contact" class="py-16 bg-brand-50 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Hours -->
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-brand-600 font-semibold tracking-wider uppercase text-xs">Get in Touch</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">We'd Love to Hear From You</h2>
+                        <p class="text-stone-600 mt-2">Have questions about catering, private events, or your online order? Reach out anytime.</p>
+                    </div>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start space-x-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-900 text-sm">Headquarters Address</h4>
+                                <p class="text-stone-600 text-sm">742 Evergreen Terrace, Suite 100, City Center</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-900 text-sm">Customer Hotline</h4>
+                                <p class="text-stone-600 text-sm">(555) 234-5678 or (555) 987-6543</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-900 text-sm">Email Inquiries</h4>
+                                <p class="text-stone-600 text-sm">support@thegrandfork.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
+                    <h3 class="font-serif text-2xl font-bold text-stone-900 mb-6">Send Us a Message</h3>
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Your Name</label>
+                            <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-brand-50 border border-stone-200 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Email Address</label>
+                            <input type="email" id="contact-email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-brand-50 border border-stone-200 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Message</label>
+                            <textarea id="contact-message" rows="4" required placeholder="How can we help you today?" class="w-full px-4 py-3 rounded-xl bg-brand-50 border border-stone-200 text-sm focus:outline-none focus:border-brand-600"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-950 text-stone-400 py-16 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-utensils text-sm"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">The Grand Fork</span>
+                    </div>
+                    <p class="text-sm">Your ultimate destination for premium casual-dining, online menu ordering, and legendary desserts.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wider uppercase">Navigation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Home Page</a></li>
+                        <li><a href="#menu" class="hover:text-white transition">Full Menu & Prices</a></li>
+                        <li><a href="#locations" class="hover:text-white transition">Our Branches</a></li>
+                        <li><a href="#offers" class="hover:text-white transition">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wider uppercase">Popular Categories</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#menu" class="hover:text-white transition">Dinner Menu Selections</a></li>
+                        <li><a href="#menu" class="hover:text-white transition">Steaks & Prime Ribs</a></li>
+                        <li><a href="#menu" class="hover:text-white transition">Artisanal Cheesecakes</a></li>
+                        <li><a href="#menu" class="hover:text-white transition">Gourmet Burgers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm tracking-wider uppercase">Stay Updated</h4>
+                    <form class="space-y-2" onsubmit="event.preventDefault(); showNotification('Subscribed successfully to newsletter!');">
+                        <input type="email" placeholder="Enter your email" required class="w-full px-4 py-2.5 rounded-xl bg-stone-900 border border-stone-800 text-white text-sm focus:outline-none focus:border-brand-600">
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition shadow">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-stone-900 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 The Grand Fork Inc. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div id="cart-backdrop" class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm transition-opacity"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-6 bg-stone-900 text-white flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-bag-shopping text-brand-600 text-xl"></i>
+                        <h3 class="font-serif text-xl font-bold">Your Takeout Cart</h3>
+                    </div>
+                    <button id="close-cart" class="text-stone-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Selected Branch Notice -->
+                <div class="bg-brand-50 px-6 py-2.5 border-b border-stone-200 flex items-center justify-between text-xs text-stone-700">
+                    <span>Pickup/Delivery Branch: <strong id="cart-branch-name" class="text-brand-700">Downtown Grand Fork</strong></span>
+                    <a href="#locations" onclick="toggleCartDrawer()" class="text-brand-600 underline font-semibold">Change</a>
+                </div>
+
+                <!-- Cart Items Container -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-stone-100">
+                    <!-- Dynamic Cart Items -->
+                </div>
+
+                <!-- Cart Footer & Checkout -->
+                <div class="p-6 bg-stone-50 border-t border-stone-200 space-y-4">
+                    <div class="space-y-2 text-sm text-stone-600">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal" class="font-semibold text-stone-950">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Estimated Tax (8%)</span>
+                            <span id="cart-tax" class="font-semibold text-stone-950">$0.00</span>
+                        </div>
+                        <div id="discount-row" class="flex justify-between text-brand-600 hidden">
+                            <span>Discount (<span id="discount-code-label">CODE</span>)</span>
+                            <span id="cart-discount" class="font-semibold">-$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-stone-900 pt-2 border-t border-stone-200">
+                            <span>Total Amount</span>
+                            <span id="cart-total" class="text-brand-600 text-lg">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="checkoutOrder()" class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg transition">
+                        Proceed to Secure Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Notification Toast -->
+    <div id="notification-toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-stone-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 text-sm border border-stone-800">
+        <i class="fa-solid fa-circle-check text-brand-600 text-lg"></i>
+        <span id="notification-text">Item added to cart!</span>
+    </div>
+
+    <!-- JavaScript Application Code -->
+    <script>
+        // Menu Dataset with realistic items & prices
+        const menuItems = [
+            { id: 1, name: "Grand Truffle Burger", category: "burgers", price: 18.95, rating: 4.9, reviews: 142, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=600", desc: "Fresh ground USDA Prime beef, melted truffle gouda, caramelized onions, wild mushrooms, and garlic aioli on a toasted brioche bun." },
+            { id: 2, name: "Crispy Avocado Egg Rolls", category: "appetizers", price: 15.50, rating: 4.8, reviews: 98, image: "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&q=80&w=600", desc: "Avocado, sun-dried tomato, red onion, and cilantro fried crisp in a wonton wrapper. Served with spicy tamarind-cashew dipping sauce." },
+            { id: 3, name: "Prime New York Strip Steak", category: "steaks", price: 42.00, rating: 5.0, reviews: 210, image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80&w=600", desc: "14oz aged center-cut NY strip grilled over open flames with herb garlic butter, served with loaded mashed potatoes and asparagus." },
+            { id: 4, name: "Spicy Rigatoni Vodka Pasta", category: "pasta", price: 22.50, rating: 4.7, reviews: 115, image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281297?auto=format&fit=crop&q=80&w=600", desc: "Rigatoni pasta tossed in our signature creamy calabrian chili vodka sauce with fresh basil, parmesan, and optional grilled chicken." },
+            { id: 5, name: "Original Legendary Cheesecake", category: "desserts", price: 10.95, rating: 5.0, reviews: 430, image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&q=80&w=600", desc: "Our famous creamy baked cheesecake with a graham cracker crust and fresh strawberry topping or homemade whipped cream." },
+            { id: 6, name: "Ahi Tuna Tartare Salad", category: "salads", price: 21.00, rating: 4.8, reviews: 88, image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=600", desc: "Seared sesame-crusted ahi tuna over crisp baby field greens, avocado, mango, cucumber, and ginger-soy vinaigrette dressing." },
+            { id: 7, name: "Crispy Buffalo Calamari", category: "appetizers", price: 16.95, rating: 4.7, reviews: 76, image: "https://images.unsplash.com/photo-1599487484170-7c1e6e5fa81d?auto=format&fit=crop&q=80&w=600", desc: "Tender calamari lightly dusted and flash-fried, tossed in spicy buffalo butter sauce with crumbled gorgonzola and ranch." },
+            { id: 8, name: "Classic Bacon Cheeseburger", category: "burgers", price: 16.50, rating: 4.8, reviews: 164, image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&q=80&w=600", desc: "Double cheddar cheese, crispy applewood smoked bacon, crisp lettuce, tomato, pickles, and signature grand sauce." },
+            { id: 9, name: "Filet Mignon & Lobster Tail", category: "steaks", price: 54.00, rating: 5.0, reviews: 195, image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600", desc: "8oz center-cut filet mignon paired with a butter-poached Maine lobster tail, served with roasted seasonal vegetables." },
+            { id: 10, name: "Fettuccine Alfredo with Chicken", category: "pasta", price: 23.95, rating: 4.7, reviews: 130, image: "https://images.unsplash.com/photo-1645112411341-6c4fd0237146?auto=format&fit=crop&q=80&w=600", desc: "Fresh egg fettuccine tossed in a rich, velvety parmesan garlic cream sauce topped with grilled herb chicken breast." },
+            { id: 11, name: "Godiva Chocolate Fudge Cake", category: "desserts", price: 11.95, rating: 4.9, reviews: 240, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=600", desc: "Layers of flourless chocolate cake, Godiva chocolate mousse, and rich fudge ganache served with vanilla bean ice cream." },
+            { id: 12, name: "Caesar Salad with Grilled Salmon", category: "salads", price: 19.50, rating: 4.6, reviews: 92, image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&q=80&w=600", desc: "Crisp romaine hearts, garlic herb croutons, aged parmesan shavings, and house caesar dressing topped with grilled Atlantic salmon." }
+        ];
+
+        let cart = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let activeBranch = 'Downtown Grand Fork';
+        let appliedDiscount = { code: '', percentage: 0 };
+
+        // DOM Elements
+        const menuGrid = document.getElementById('menu-grid');
+        const cartBtn = document.getElementById('cart-btn');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartBackdrop = document.getElementById('cart-backdrop');
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartSubtotalEl = document.getElementById('cart-subtotal');
+        const cartTaxEl = document.getElementById('cart-tax');
+        const cartTotalEl = document.getElementById('cart-total');
+        const discountRow = document.getElementById('discount-row');
+        const discountCodeLabel = document.getElementById('discount-code-label');
+        const cartDiscountEl = document.getElementById('cart-discount');
+        const menuSearchInput = document.getElementById('menu-search');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Category Filter Buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.category-btn').forEach(b => {
+                        b.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                        b.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+                    });
+                    e.target.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+                    e.target.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+                    
+                    activeCategory = e.target.getAttribute('data-category');
+                    renderMenu();
+                });
+            });
+
+            // Search input
+            menuSearchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderMenu();
+            });
+
+            // Cart Drawer Toggles
+            cartBtn.addEventListener('click', toggleCartDrawer);
+            closeCartBtn.addEventListener('click', toggleCartDrawer);
+            cartBackdrop.addEventListener('click', toggleCartDrawer);
+
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // FAQ Toggles
+            document.querySelectorAll('.faq-toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('i');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        }
+
+        function toggleCartDrawer() {
+            cartDrawer.classList.toggle('hidden');
+        }
+
+        function selectLocation(branchName) {
+            activeBranch = branchName;
+            document.getElementById('cart-branch-name').innerText = activeBranch;
+            showNotification(`Selected branch: ${activeBranch}`);
+        }
+
+        function renderMenu() {
+            const filtered = menuItems.filter(item => {
+                const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                menuGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa-solid fa-utensils text-4xl text-stone-300 mb-3"></i>
+                        <h3 class="text-lg font-bold text-stone-700">No dishes found</h3>
+                        <p class="text-sm text-stone-500 mt-1">Try adjusting your search query or selected category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            menuGrid.innerHTML = filtered.map(item => `
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border border-stone-200 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-52 overflow-hidden bg-stone-100">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/fdf8f6/d97706?text=The+Grand+Fork'">
+                            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold text-stone-800 shadow flex items-center space-x-1">
+                                <i class="fa-solid fa-star text-amber-500"></i>
+                                <span>${item.rating} (${item.reviews})</span>
+                            </div>
+                            <span class="absolute bottom-3 left-3 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                                ${item.category}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-xl font-bold text-stone-900 group-hover:text-brand-600 transition">${item.name}</h3>
+                                <span class="font-serif text-lg font-bold text-brand-600">$${item.price.toFixed(2)}</span>
+                            </div>
+                            <p class="text-stone-600 text-sm leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="addToCart(${item.id})" class="w-full py-3 rounded-2xl bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white font-semibold text-sm transition shadow-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(itemId) {
+            const product = menuItems.find(i => i.id === itemId);
+            const existing = cart.find(i => i.id === itemId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showNotification(`Added "${product.name}" to cart!`);
+        }
+
+        function updateQuantity(itemId, delta) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== itemId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.innerText = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="py-16 text-center text-stone-400">
+                        <i class="fa-solid fa-bag-shopping text-4xl mb-3"></i>
+                        <p class="text-sm font-medium">Your cart is currently empty.</p>
+                        <a href="#menu" onclick="toggleCartDrawer()" class="inline-block mt-3 px-4 py-2 bg-brand-600 text-white text-xs font-semibold rounded-xl shadow">Explore Menu</a>
+                    </div>
+                `;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="py-4 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover" onerror="this.src='https://placehold.co/100x100/fdf8f6/d97706?text=Item'">
+                            <div>
+                                <h4 class="font-bold text-sm text-stone-900">${item.name}</h4>
+                                <span class="text-xs text-stone-500">$${item.price.toFixed(2)} each</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center text-xs font-bold transition">-</button>
+                            <span class="text-sm font-bold w-6 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center text-xs font-bold transition">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.08;
+            let discountAmount = 0;
+
+            if (appliedDiscount.percentage > 0) {
+                discountAmount = subtotal * (appliedDiscount.percentage / 100);
+                discountRow.classList.remove('hidden');
+                discountCodeLabel.innerText = appliedDiscount.code;
+                cartDiscountEl.innerText = `-$${discountAmount.toFixed(2)}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            const total = Math.max(0, subtotal + tax - discountAmount);
+
+            cartSubtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+            cartTaxEl.innerText = `$${tax.toFixed(2)}`;
+            cartTotalEl.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function applyCoupon(code, percentage) {
+            appliedDiscount = { code, percentage };
+            updateCartUI();
+            showNotification(`Coupon "${code}" applied successfully!`);
+            if (cartDrawer.classList.contains('hidden')) {
+                toggleCartDrawer();
+            }
+        }
+
+        function checkoutOrder() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            toggleCartDrawer();
+            showNotification('Order placed successfully! Thank you for dining with The Grand Fork.');
+            cart = [];
+            appliedDiscount = { code: '', percentage: 0 };
+            updateCartUI();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            showNotification(`Thank you, ${name}! Your message has been sent successfully.`);
+            document.getElementById('contact-form').reset();
+        }
+
+        function showNotification(message) {
+            const toast = document.getElementById('notification-toast');
+            document.getElementById('notification-text').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
